@@ -1,0 +1,26 @@
+###Google Pros - Cons Comparisons word cloud
+all_google_pros <- paste(google$pros,collapse="")
+all_google_cons <- paste(google$cons,collapse = "")
+all_google <- c(all_google_pros,all_google_cons)
+all_google_qdap <- rm_clean(all_google)
+all_google_vs <- VectorSource(all_google_qdap) 
+all_google_vc <- VCorpus(all_google_vs)
+all_google_clean<- word_clean(all_google_vc)
+all_google_tdm <- TermDocumentMatrix(all_google_clean)
+colnames(all_google_tdm) <- c("Google Pros","Google Cons")
+all_google_tdm_m <- as.matrix(all_google_tdm)
+comparison.cloud(all_google_tdm_m,colors = c("orange","blue"),max.words = 50)
+
+
+###Amazons Pros 
+all_am_p<-paste(amazon$pros,collapse = "")
+all_am_c<-paste(amazon$cons,collapse = "")
+all_amazona<-c(all_am_p,all_am_c)
+all_amazon_clean<-rm_clean(all_amazona)
+all_amazon_vs <- VectorSource(all_amazon_clean) 
+all_amazon_vc <- VCorpus(all_amazon_vs)
+all_amazon_vcclean<- word_clean(all_amazon_vc)
+all_amazon_tdm <- TermDocumentMatrix(all_amazon_vcclean)
+colnames(all_amazon_tdm) <- c("Amazon Pros","Amazons Cons")
+all_amazon_tdm_m <- as.matrix(all_amazon_tdm)
+comparison.cloud(all_amazon_tdm_m,colors = c("orange","blue"),max.words = 50)
